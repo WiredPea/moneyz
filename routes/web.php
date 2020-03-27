@@ -14,9 +14,7 @@ use Spatie\Honeypot\ProtectAgainstSpam;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FrontPageController@index');
 
 Route::middleware(ProtectAgainstSpam::class)->group(function() {
     Auth::routes();
