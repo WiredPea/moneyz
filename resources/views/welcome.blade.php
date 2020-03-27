@@ -35,6 +35,7 @@
         <div class="row">
             <footer class="col-md-8">
                 <a href="https://github.com/WiredPea/moneyz">Github</a>
+                <a href="https://discord.gg/DyNuvfR">Discord</a>
             </footer>
         </div>
     </div>
