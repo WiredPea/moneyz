@@ -17,7 +17,7 @@ class MakeLedgerNameString extends Migration
             $table->dropColumn('number');
         });
         Schema::table('ledgers', function (Blueprint $table) {
-            $table->string('number')->index();
+            $table->string('number')->after('id')->index();
         });
     }
 
