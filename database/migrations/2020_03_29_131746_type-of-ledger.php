@@ -21,7 +21,7 @@ class TypeOfLedger extends Migration
         });
 
         Schema::table('ledgers', function (Blueprint $table) {
-            $table->bigInteger('ledgerType_id')->after('user_id')->unsigned()->index();
+            $table->bigInteger('ledgerType_id')->after('user_id')->unsigned()->index()->nullable();
         });
 
         Schema::table('ledgers', function (Blueprint $table) {
