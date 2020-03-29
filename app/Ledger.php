@@ -11,4 +11,9 @@ class Ledger extends Model
         'number',
         'name',
     ];
+
+    public function type()
+    {
+        return $this->belongsTo('\App\LegerType');
+    }
 }
