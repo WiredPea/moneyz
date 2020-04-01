@@ -8,6 +8,15 @@
                 </a>
             </li>
             <li class="nav-item">
+                <span class="nav-link" href="#">Accounts</span>
+                <ul>
+                    <li>Assets</li>
+                    <li>Liabilities</li>
+                    <li>Costs</li>
+                    <li>Revenue</li>
+                </ul>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#">
                     <span data-feather="file"></span>
                     Orders
