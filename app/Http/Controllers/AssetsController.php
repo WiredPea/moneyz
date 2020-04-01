@@ -25,7 +25,10 @@ class AssetsController extends Controller
             ->orderBy('name')
             ->get();
 
-        dd([$ledgerType, $assets]);
+        return view('assets.index', [
+            'ledgerType' => $ledgerType,
+            'assets' => $assets,
+        ]);
     }
 
     /**
@@ -35,7 +38,7 @@ class AssetsController extends Controller
      */
     public function create()
     {
-        //
+        return view('assets.create');
     }
 
     /**
