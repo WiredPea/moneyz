@@ -14,7 +14,7 @@ class TypeOfLedger extends Migration
      */
     public function up()
     {
-        Schema::create('ledgertypes', function (Blueprint $table) {
+        Schema::create('ledger_types', function (Blueprint $table) {
             $table->id();
             $table->string('type');
             $table->timestamps();
@@ -25,13 +25,13 @@ class TypeOfLedger extends Migration
         });
 
         Schema::table('ledgers', function (Blueprint $table) {
-            $table->foreign('ledgerType_id')->references('id')->on('ledgertypes');
+            $table->foreign('ledgerType_id')->references('id')->on('ledger_types');
         });
 
-        DB::table('ledgertypes')->insert(['type' => 'Assets']);
-        DB::table('ledgertypes')->insert(['type' => 'Liabilities']);
-        DB::table('ledgertypes')->insert(['type' => 'Revenue']);
-        DB::table('ledgertypes')->insert(['type' => 'Costs']);
+        DB::table('ledger_types')->insert(['type' => 'Assets']);
+        DB::table('ledger_types')->insert(['type' => 'Liabilities']);
+        DB::table('ledger_types')->insert(['type' => 'Revenue']);
+        DB::table('ledger_types')->insert(['type' => 'Costs']);
 
     }
 
@@ -46,6 +46,6 @@ class TypeOfLedger extends Migration
             $table->dropColumn('ledgerType');
         });
 
-        Schema::dropIfExists('ledgertypes');
+        Schema::dropIfExists('ledger_types');
     }
 }
