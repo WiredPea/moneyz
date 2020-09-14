@@ -25,4 +25,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(Authenticate::class)->group(function() {
     Route::resource('assets',AssetsController::class);
+    Route::post('uploadtransactions', [\App\Http\Controllers\TransactionProcessController::class, 'upload'])->name('uploadTransactions');
 });

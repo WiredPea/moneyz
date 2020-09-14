@@ -44,12 +44,23 @@ class AssetsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        $number = $_POST['number'];
+        $name = $_POST['name'];
+        $ledger = new Ledger();
+        $ledger->user_id = $user->id;
+        $ledger->name = $name;
+        $ledger->number = $number;
+        $ledger->ledgerType_id = 1;
+
+        $ledger->save();
+
+        return redirect(route('assets.index'));
     }
 
     /**
