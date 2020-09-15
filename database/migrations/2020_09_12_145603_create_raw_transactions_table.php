@@ -21,13 +21,13 @@ class CreateRawTransactionsTable extends Migration
             $table->bigInteger('account_id')->unsigned();
             $table->date('date');
             $table->char('debitCredit');
-            $table->integer('amount')->unsigned();
+            $table->integer('amount');
             $table->string('contraAccount');
             $table->string('contraAccountHolder');
-            $table->string('method');
-            $table->string('description');
-            $table->string('authorizationNumber');
-            $table->string('creditor');
+            $table->string('method')->nullable();
+            $table->string('description')->nullable();
+            $table->string('authorizationNumber')->nullable();
+            $table->string('creditor')->nullable();
             $table->string('reference')->nullable();
             $table->timestamps();
         });

@@ -64,28 +64,52 @@ class ImportTransactions implements ShouldQueue
             $authorizationNumber = 11;
             $creditor = 12;
             $reference = 14;
+        } else if (strtolower($this->transactionProcessor->bank) === 'sns') {
+            print("Bank type is SNS\n");
+            $delimiter = ',';
+            $date = 0;
+            $accountNumber = 1;
+            $debitCredit = 3;
+            $amount = 10;
+            $contraAccount = 2;
+            $contraAccountHolder = 3;
+            $method = 14;
+            $description = 17;
+            $authorizationNumber = 15;
+            $creditor = 12;
+            $reference = 16;
         }
 
         $contents = Storage::get($this->transactionProcessor->filename);
         $rows = explode("\n", $contents);
         foreach (array_reverse($rows) as $row) {
+            if($row == '') {
+                continue;
+            }
             $record = str_getcsv($row, $delimiter);
+            print_r($record);
             $account = Ledger::where('number', '=', $record[$accountNumber])
                 ->where('user_id', '=', $this->transactionProcessor->user_id)
                 ->first();
             print($account);
             if (!$account) {
+                print("No account found\n");
                 continue;
             }
             $transaction = new RawTransaction();
             $transaction->account_id = $account->id;
             $transaction->date = Carbon::parse($record[$date])->locale('nl');
-            $transaction->debitCredit = $record[$debitCredit];
-            $transaction->amount = intval(strval(str_replace(',', '.', $record[$amount]) * 100));
+            if (strtolower($this->transactionProcessor->bank) !== 'sns') {
+                $transaction->debitCredit = $record[$debitCredit];
+                $transaction->amount = intval(strval(str_replace(',', '.', $record[$amount]) * 100)) * -1;
+            } else {
+                $transaction->debitCredit = 'D';
+                $transaction->amount = intval(strval(str_replace(',', '.', $record[$amount]) * 100));
+            }
             $transaction->contraAccount = $record[$contraAccount];
             $transaction->contraAccountHolder = $record[$contraAccountHolder];
             $transaction->method = $record[$method];
-            $transaction->description = $record[$description];
+            $transaction->description = substr($record[$description], 0, 190);
             $transaction->authorizationNumber = $record[$authorizationNumber];
             $transaction->creditor = $record[$creditor];
             $transaction->reference = $transaction[$reference];
