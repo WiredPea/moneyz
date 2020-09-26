@@ -19,4 +19,9 @@ class RawTransaction extends Model
         'creditor',
         'reference',
     ];
+
+    public function ledger()
+    {
+        return $this->hasOne('App\Ledger', 'id', 'account_id');
+    }
 }

@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Ledger::class, function (Faker $faker) {
     return [
-        'number' => (string)rand(0, 1000000),
+        'number' => $faker->iban(),
         'name' => $faker->word,
         'user_id' => rand(1, 10),
         'ledgerType_id' => rand(1, 4),

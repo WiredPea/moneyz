@@ -17,6 +17,9 @@
                 </ul>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{{ route('transactions.index') }}">Transactions</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#">
                     <span data-feather="file"></span>
                     Orders

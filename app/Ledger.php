@@ -17,4 +17,14 @@ class Ledger extends Model
     {
         return $this->belongsTo('\App\LegerType');
     }
+
+    public function transactions()
+    {
+        return $this->hasMany('\App\RawTransaction', 'account_id');
+    }
+
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id', 'user_id');
+    }
 }
