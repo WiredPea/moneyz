@@ -23,7 +23,7 @@
                             <td>{{ $transaction->date }}</td>
                             <td>{{ $transaction->contraAccount }}</td>
                             <td>{{ $transaction->contraAccountHolder }}</td>
-                            <td>{{ $transaction->description }}</td>
+                            <td>{{ \Illuminate\Support\Str::limit($transaction->description, 50, $end='...') }}</td>
                             <td>
                                 @if ($transaction->amount < 0)
                                   <b style="color: red;">{{ number_format($transaction->amount / 100, 2) }}</b>

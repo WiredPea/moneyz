@@ -17,7 +17,7 @@ class TransactionController extends Controller
     {
         $user = Auth::user();
 
-        $ledgers = $user->ledgers;
+        $ledgers = $user->ledgers->pluck('id')->toArray();
 
         $transactions = RawTransaction::whereIn('account_id', $ledgers)->orderBy('date', 'desc')->get();
 
