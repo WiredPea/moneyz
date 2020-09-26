@@ -11,7 +11,7 @@
                 <span class="nav-link" href="#">Accounts</span>
                 <ul>
                     <li><a href="{{ route('assets.index') }}">Assets</a></li>
-                    <li>Liabilities</li>
+                    <li>Labilities</li>
                     <li>Costs</li>
                     <li>Revenue</li>
                 </ul>
