@@ -7,7 +7,7 @@
 {{--                <a href="{{ route('assets.create') }}"><i class="fad fa-plus-square"></i></a>--}}
 {{--            </div>--}}
             <div class="col-md-12">
-                <table class="table">
+                <table class="table" style="table-layout:fixed;">
                     <thead>
                     <tr>
                         <th scope="col">Date</th>
@@ -20,10 +20,10 @@
                     <tbody>
                     @foreach ($transactions as $transaction)
                         <tr>
-                            <td>{{ $transaction->date }}</td>
-                            <td>{{ $transaction->contraAccount }}</td>
-                            <td>{{ $transaction->contraAccountHolder }}</td>
-                            <td>{{ \Illuminate\Support\Str::limit($transaction->description, 50, $end='...') }}</td>
+                            <td style="white-space: nowrap">{{ $transaction->date }}</td>
+                            <td style="white-space: nowrap">{{ $transaction->contraAccount }}</td>
+                            <td style="white-space: nowrap">{{ $transaction->contraAccountHolder }}</td>
+                            <td style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis;">{{ $transaction->description }}</td>
                             <td>
                                 @if ($transaction->amount < 0)
                                   <b style="color: red;">{{ number_format($transaction->amount / 100, 2) }}</b>

@@ -18,6 +18,6 @@ $factory->define(RawTransaction::class, function (Faker $faker) {
         'contraAccount' => $faker->iban('NL'),
         'contraAccountHolder' => $faker->company,
         'method' => $faker->word(),
-        'description' => $faker->sentence(4),
+        'description' => $faker->sentence(10),
     ];
 });
