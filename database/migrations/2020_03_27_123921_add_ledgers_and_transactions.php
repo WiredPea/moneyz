@@ -16,7 +16,7 @@ class AddLedgersAndTransactions extends Migration
         Schema::create('ledgers', function (Blueprint $table) {
             $table->id();
             $table->integer('number')->unsigned()->index();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->bigInteger('user_id')->unsigned()->index();
             $table->timestamps();
         });

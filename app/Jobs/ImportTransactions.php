@@ -93,26 +93,48 @@ class ImportTransactions implements ShouldQueue
                 ->first();
             print($account);
             if (!$account) {
+                // There was no account, but this user has data about it.
+                // So, create it
                 print("No account found\n");
-                continue;
+                print("Creating account");
+                $account = new Ledger([
+                    'number' => $record[$accountNumber],
+                    'user_id' => $this->transactionProcessor->user_id,
+                    'ledgerType_id' => 1,
+                ]);
+                $account->save();
             }
-            $transaction = new RawTransaction();
-            $transaction->account_id = $account->id;
-            $transaction->date = Carbon::parse($record[$date])->locale('nl');
+
+            // normalize some bank differences
+            $dc = 'D';
+            $transactionAmount = 0;
             if (strtolower($this->transactionProcessor->bank) !== 'sns') {
-                $transaction->debitCredit = $record[$debitCredit];
-                $transaction->amount = intval(strval(str_replace(',', '.', $record[$amount]) * 100)) * -1;
+                $dc = $record[$debitCredit];
+                if ($dc === 'C') {
+                    $transactionAmount = intval(strval(str_replace(',', '.',
+                                $record[$amount]) * 100));
+                } else {
+                    $transactionAmount = intval(strval(str_replace(',', '.',
+                                $record[$amount]) * 100)) * -1;
+                }
             } else {
-                $transaction->debitCredit = 'D';
-                $transaction->amount = intval(strval(str_replace(',', '.', $record[$amount]) * 100));
+                $transactionAmount = intval(strval(str_replace(',', '.', $record[$amount]) * 100));
             }
-            $transaction->contraAccount = $record[$contraAccount];
-            $transaction->contraAccountHolder = $record[$contraAccountHolder];
-            $transaction->method = $record[$method];
-            $transaction->description = substr($record[$description], 0, 190);
-            $transaction->authorizationNumber = $record[$authorizationNumber];
-            $transaction->creditor = $record[$creditor];
-            $transaction->reference = $transaction[$reference];
+
+            // Check if this transaction already exists
+            $transaction = RawTransaction::firstOrCreate([
+                'account_id' => $account->id,
+                'date' => Carbon::parse($record[$date])->locale('nl'),
+                'debitCredit' => $dc,
+                'amount' => $transactionAmount,
+                'contraAccount' => $record[$contraAccount],
+                'contraAccountHolder' => $record[$contraAccountHolder],
+                'method' => $record[$method],
+                'description' => substr($record[$description], 0, 190),
+                'authorizationNumber' => $record[$authorizationNumber],
+                'creditor' => $record[$creditor],
+                'reference' => $record[$reference],
+            ]);
             $transaction->save();
         }
         print("Done\n");

@@ -11,6 +11,7 @@ class Ledger extends Model
         'user_id',
         'number',
         'name',
+        'ledgerType_id',
     ];
 
     public function type()
