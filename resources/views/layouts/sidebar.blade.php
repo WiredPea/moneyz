@@ -2,7 +2,7 @@
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route('home') }}">
+                <a class="nav-link active" href="{{ route('dashboard') }}">
                     <span data-feather="home"></span>
                     Dashboard <span class="sr-only">(current)</span>
                 </a>
@@ -11,7 +11,7 @@
                 <span class="nav-link" href="#">Accounts</span>
                 <ul>
                     <li><a href="{{ route('assets.index') }}">Assets</a></li>
-                    <li>Labilities</li>
+                    <li>Liabilities</li>
                     <li>Costs</li>
                     <li>Revenue</li>
                 </ul>

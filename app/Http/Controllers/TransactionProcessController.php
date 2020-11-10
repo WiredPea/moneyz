@@ -27,6 +27,6 @@ class TransactionProcessController extends Controller
 
         ImportTransactions::dispatch($transactionProcessor);
 
-        return redirect(route('home'));
+        return redirect(route('dashboard'));
     }
 }

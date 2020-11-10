@@ -21,7 +21,7 @@ Route::middleware(ProtectAgainstSpam::class)->group(function() {
     Auth::routes();
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 Route::middleware(Authenticate::class)->group(function() {
     Route::resource('assets',AssetsController::class);
