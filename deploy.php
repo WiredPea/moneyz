@@ -16,7 +16,7 @@ add('writable_dirs', ['bootstrap/cache', 'storage']);
 
 // Servers
 
-host('wiredpea.com')
+host('37.97.192.4')
     ->user('noe')
     ->identityFile('~/.ssh/id_rsa')
     ->set('deploy_path', '/var/www/moneyz');
