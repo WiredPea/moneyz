@@ -1,18 +1,19 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeders.
      *
      * @return void
      */
     public function run()
     {
-        factory(App\User::class, 10)->create();
+        User::factory()->count(10)->create();
     }
 }

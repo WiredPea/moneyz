@@ -1,23 +1,29 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\RawTransaction;
 use App\User;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(RawTransaction::class, function (Faker $faker) {
-    $user = User::all()->random();
-    $ledger = $user->ledgers->where('ledgerType_id', '=', 1)->random();
+class RawTransactionFactory extends Factory
+{
+    protected $model = RawTransaction::class;
 
-    return [
-        'account_id' => $ledger->id,
-        'date' => $faker->date($format = 'Y-m-d', $max = 'now'),
-        'debitCredit' => 'D',
-        'amount' => $faker->numberBetween($min = -9000, $max = 9000),
-        'contraAccount' => $faker->iban('NL'),
-        'contraAccountHolder' => $faker->company,
-        'method' => $faker->word(),
-        'description' => $faker->sentence(10),
-    ];
-});
+    public function definition()
+    {
+        $user = User::all()->random();
+        $ledger = $user->ledgers->where('ledgerType_id', '=', 1)->random();
+
+        return [
+            'account_id' => $ledger->id,
+            'date' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
+            'debitCredit' => 'D',
+            'amount' => $this->faker->numberBetween($min = -9000, $max = 9000),
+            'contraAccount' => $this->faker->iban('NL'),
+            'contraAccountHolder' => $this->faker->company,
+            'method' => $this->faker->word(),
+            'description' => $this->faker->sentence(10),
+        ];
+    }
+}

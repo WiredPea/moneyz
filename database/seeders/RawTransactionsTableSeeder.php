@@ -1,16 +1,19 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\RawTransaction;
 use Illuminate\Database\Seeder;
 
 class RawTransactionsTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeders.
      *
      * @return void
      */
     public function run()
     {
-        factory(App\RawTransaction::class, 2500)->create();
+        RawTransaction::factory()->count(2500)->create();
     }
 }

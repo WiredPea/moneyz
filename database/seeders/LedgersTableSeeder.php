@@ -1,16 +1,19 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Ledger;
 use Illuminate\Database\Seeder;
 
 class LedgersTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeders.
      *
      * @return void
      */
     public function run()
     {
-        factory(App\Ledger::class, 250)->create();
+        Ledger::factory()->count(250)->create();
     }
 }

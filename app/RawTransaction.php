@@ -2,10 +2,13 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class RawTransaction extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'account_id',
         'date',

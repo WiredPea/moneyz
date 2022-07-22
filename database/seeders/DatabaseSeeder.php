@@ -1,5 +1,8 @@
 <?php
 
+use Database\Seeders\UsersTableSeeder;
+use Database\Seeders\LedgersTableSeeder;
+use Database\Seeders\RawTransactionsTableSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
